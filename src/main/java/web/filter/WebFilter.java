@@ -25,7 +25,7 @@ public class WebFilter implements Filter {
     private JakartaServletWebApplication application;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         this.application =
                 JakartaServletWebApplication.buildApplication(filterConfig.getServletContext());
         this.templateEngine = buildTemplateEngine(this.application);
@@ -36,10 +36,6 @@ public class WebFilter implements Filter {
         if (!process((HttpServletRequest)request, (HttpServletResponse)response)) {
             chain.doFilter(request, response);
         }
-    }
-
-    @Override
-    public void destroy() {
     }
 
     private boolean process(final HttpServletRequest request, final HttpServletResponse response)

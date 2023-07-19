@@ -14,7 +14,7 @@ public class ControllerMappings {
     private static final Map<String, MainController> controllersByURL;
 
     static {
-        controllersByURL = new HashMap<String, MainController>();
+        controllersByURL = new HashMap<>();
         controllersByURL.put("/", new HomeServlet());
         controllersByURL.put("/login", new LoginServlet());
         controllersByURL.put("/registration", new RegistrationServlet());
