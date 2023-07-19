@@ -13,7 +13,7 @@ import org.thymeleaf.web.IWebExchange;
 import org.thymeleaf.web.IWebRequest;
 import org.thymeleaf.web.servlet.JakartaServletWebApplication;
 import web.controllers.MainController;
-import web.util.ControllerMappings;
+import web.mapping.ControllerMappings;
 
 import java.io.IOException;
 import java.io.Writer;

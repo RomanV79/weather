@@ -1,4 +1,4 @@
-package web.util;
+package web.mapping;
 
 import org.thymeleaf.web.IWebRequest;
 import web.controllers.HomeServlet;
