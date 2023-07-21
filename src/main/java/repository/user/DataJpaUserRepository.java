@@ -1,7 +1,9 @@
 package repository.user;
 
 import model.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class DataJpaUserRepository implements UserRepository {
 
     JpaUserRepository jpaUserRepository;
