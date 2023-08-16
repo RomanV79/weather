@@ -1,14 +1,18 @@
 package web.controllers;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+import model.User;
 import org.thymeleaf.ITemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.web.IWebExchange;
+import service.UserService;
 
 import java.io.Writer;
 
-@Log4j
+@Slf4j
 public class RegistrationServlet implements MainController {
+
+    private final UserService userService = new UserService();
 
     @Override
     public void process(IWebExchange webExchange, ITemplateEngine templateEngine, Writer writer) {
@@ -20,7 +24,15 @@ public class RegistrationServlet implements MainController {
             String login = webExchange.getRequest().getParameterValue("login");
             String password = webExchange.getRequest().getParameterValue("password");
             String repeatPassword = webExchange.getRequest().getParameterValue("repeat-password");
-            log.info("form data: login = " + login + " // password = " + password + " // repeat-password = " + repeatPassword);
+            log.info("form data: login = " + login
+                    + " // password = " + password
+                    + " // repeat-password = " + repeatPassword);
+
+            if (login != null && password != null && repeatPassword != null) {
+                if (password.equals(repeatPassword)) {
+                    userService.insert(new User(login, password));
+                }
+            }
 
 
 

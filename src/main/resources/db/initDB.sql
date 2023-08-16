@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS users
     password    VARCHAR                 NOT NULL
 );
 CREATE UNIQUE INDEX users_unique_login_idx ON users (login);
+CREATE SEQUENCE user_seq START 101;
 
 CREATE TABLE IF NOT EXISTS sessions
 (

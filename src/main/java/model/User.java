@@ -7,7 +7,6 @@ import java.util.Set;
 
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -18,7 +17,7 @@ public class User {
     @Id
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", updatable = false, nullable = false, unique = true)
     private Long id;
 
     @Column(name = "login", nullable = false)
@@ -32,4 +31,9 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public Set<Location> location;
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 }
