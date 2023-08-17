@@ -5,7 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 public class PersistUtil {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("weatherPersistence");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("weatherPersist");
 
     public static EntityManager getEntityManager() {
         return emf.createEntityManager();

@@ -6,11 +6,7 @@ import model.User;
 
 public class UserService {
 
-    private final UserDao userDao;
-
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    private final UserDao userDao = new UserDao();
 
     public void insert(String login, String password) throws UserExistException {
         User user = new User();
