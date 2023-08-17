@@ -4,33 +4,31 @@ import CustomException.UserExistException;
 import dao.util.PersistUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.UniqueConstraint;
 import lombok.extern.slf4j.Slf4j;
+import model.Session;
 import model.User;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
 
-import java.sql.SQLException;
-
 @Slf4j
-public class UserDao {
+public class SessionDao {
 
     private final EntityManager entityManager = PersistUtil.getEntityManager();
 
-    public void insert (User user) throws UserExistException {
+    public void insert (Session session) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
         try {
-            entityManager.persist(user);
+            entityManager.persist(session);
             entityManager.flush();
 
             transaction.commit();
-        } catch (ConstraintViolationException e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new UserExistException("Login already exist, try another one");
+            e.fillInStackTrace();
         }
     }
+
 }

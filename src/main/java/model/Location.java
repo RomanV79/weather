@@ -15,6 +15,8 @@ import lombok.ToString;
 public class Location {
 
     @Id
+    @SequenceGenerator(name = "locations_seq", sequenceName = "locations_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "locations_seq")
     private Long id;
 
     @Column(name = "name")
