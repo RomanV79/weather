@@ -12,7 +12,6 @@ public class UserDao {
     private final EntityManager entityManager = PersistUtil.getEntityManager();
 
     public void insert (User user) {
-        log.info("Start save user -> {}", user);
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
@@ -20,6 +19,5 @@ public class UserDao {
         entityManager.flush();
 
         transaction.commit();
-        log.info("Success insert user");
     }
 }
