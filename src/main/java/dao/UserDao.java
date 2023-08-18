@@ -4,13 +4,11 @@ import CustomException.UserExistException;
 import dao.util.PersistUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.UniqueConstraint;
 import lombok.extern.slf4j.Slf4j;
 import model.User;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
 
-import java.sql.SQLException;
+import java.util.Optional;
 
 @Slf4j
 public class UserDao {
@@ -32,5 +30,9 @@ public class UserDao {
             }
             throw new UserExistException("Login already exist, try another one");
         }
+    }
+
+    public Optional<User> getById(Long id) {
+        return Optional.ofNullable(entityManager.find(User.class, id));
     }
 }

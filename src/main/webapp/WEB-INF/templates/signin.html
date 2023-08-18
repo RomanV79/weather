@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <header th:replace="~{fragments/header :: header}"></header>
+    <header th:replace="~{fragments/header :: header (isLoggedIn=${isLoggedIn}, user=${user})}"></header>
 
 
     <main>

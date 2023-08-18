@@ -1,13 +1,13 @@
 package dao;
 
-import CustomException.UserExistException;
 import dao.util.PersistUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import lombok.extern.slf4j.Slf4j;
 import model.Session;
-import model.User;
-import org.hibernate.exception.ConstraintViolationException;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 public class SessionDao {
@@ -17,7 +17,7 @@ public class SessionDao {
     public void insert (Session session) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-
+        log.info("Start insert session");
         try {
             entityManager.persist(session);
             entityManager.flush();
@@ -29,6 +29,10 @@ public class SessionDao {
             }
             e.fillInStackTrace();
         }
+        log.info("Inserted session successful");
     }
 
+    public Optional<Session> getById(UUID id) {
+        return Optional.ofNullable(entityManager.find(Session.class, id));
+    }
 }
