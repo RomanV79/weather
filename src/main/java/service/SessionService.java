@@ -37,8 +37,6 @@ public class SessionService {
     }
 
     public void delete(String id) {
-        Session session = new Session();
-        session.setId(UUID.fromString(id));
-        sessionDao.delete(session);
+        sessionDao.deleteById(UUID.fromString(id));
     }
 }

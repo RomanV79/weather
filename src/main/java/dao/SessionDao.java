@@ -36,13 +36,13 @@ public class SessionDao {
         return Optional.ofNullable(entityManager.find(Session.class, id));
     }
 
-    public void delete(Session session) {
+    public void deleteById(UUID uuid) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         log.info("Start delete session");
         try {
+            Session session = entityManager.find(Session.class, uuid);
             entityManager.remove(session);
-            entityManager.flush();
 
             transaction.commit();
         } catch (Exception e) {

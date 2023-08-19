@@ -45,7 +45,7 @@ public class SignUpServlet extends BaseServlet {
 
         UUID uuid = sessionService.insert(user);
 
-        Cookie cookie = new Cookie("weather", uuid.toString());
+        Cookie cookie = new Cookie(AUTH_COOKIE_NAME, uuid.toString());
         resp.addCookie(cookie);
 
         resp.sendRedirect("/");
