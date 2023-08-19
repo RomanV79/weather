@@ -2,6 +2,7 @@ package service;
 
 import CustomException.IsNotValidSessionException;
 import dao.SessionDao;
+import jakarta.servlet.http.Cookie;
 import model.Session;
 import model.User;
 
@@ -33,5 +34,11 @@ public class SessionService {
         }
 
         return session;
+    }
+
+    public void delete(String id) {
+        Session session = new Session();
+        session.setId(UUID.fromString(id));
+        sessionDao.delete(session);
     }
 }

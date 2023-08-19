@@ -35,4 +35,22 @@ public class SessionDao {
     public Optional<Session> getById(UUID id) {
         return Optional.ofNullable(entityManager.find(Session.class, id));
     }
+
+    public void delete(Session session) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        log.info("Start delete session");
+        try {
+            entityManager.remove(session);
+            entityManager.flush();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.fillInStackTrace();
+        }
+        log.info("Delete session successful");
+    }
 }
