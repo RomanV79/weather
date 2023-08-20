@@ -15,8 +15,8 @@ public class LogoutServlet extends BaseServlet {
     private final SessionService sessionService = new SessionService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Optional<Cookie> authCookie = catchAuthCookie(req, AUTH_COOKIE_NAME);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Optional<Cookie> authCookie = catchAuthCookie(req);
         authCookie.ifPresent(cookie -> sessionService.delete(cookie.getValue()));
         resp.sendRedirect("/signin");
     }

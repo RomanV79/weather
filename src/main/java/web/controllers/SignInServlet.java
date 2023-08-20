@@ -30,7 +30,7 @@ public class SignInServlet extends BaseServlet {
         String login = req.getParameter("login").trim();
         String password = req.getParameter("password").trim();
 
-        User user = null;
+        User user;
         if (!login.isEmpty() && !password.isEmpty()) {
 
             try {

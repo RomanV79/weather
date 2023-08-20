@@ -2,8 +2,6 @@ package service;
 
 import CustomException.UserExistException;
 import CustomException.UserNotFoundException;
-import com.password4j.Hash;
-import com.password4j.Password;
 import dao.UserDao;
 import lombok.extern.slf4j.Slf4j;
 import model.User;

@@ -21,13 +21,12 @@ import java.util.UUID;
 public class HomeServlet extends BaseServlet {
 
     private final SessionService sessionService = new SessionService();
-    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         boolean isLoggedIn = false;
 
-        Optional<Cookie> authCookie = catchAuthCookie(req, AUTH_COOKIE_NAME);
+        Optional<Cookie> authCookie = catchAuthCookie(req);
         if (authCookie.isPresent()) {
             UUID uuid = UUID.fromString(authCookie.get().getValue());
             try {

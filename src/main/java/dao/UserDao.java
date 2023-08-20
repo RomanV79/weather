@@ -6,7 +6,6 @@ import dao.util.PersistUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
 import lombok.extern.slf4j.Slf4j;
 import model.User;
 import org.hibernate.exception.ConstraintViolationException;
@@ -42,7 +41,7 @@ public class UserDao {
     public User getByLogin(String login) throws UserNotFoundException {
         log.info("Start get user by login");
         String hql = "FROM User u WHERE u.login = :login";
-        User user = null;
+        User user;
         try {
             user = entityManager.createQuery(hql, User.class)
                     .setParameter("login", login)

@@ -46,12 +46,12 @@ public class BaseServlet extends HttpServlet {
         templateEngine.process(templateName, webContext, responce.getWriter());
     }
 
-    protected Optional<Cookie> catchAuthCookie(HttpServletRequest request, String authCookie) {
+    protected Optional<Cookie> catchAuthCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies == null || cookies.length == 0) {
             return Optional.empty();
         }
         return Arrays.stream(cookies)
-                .filter(item -> item.getName().equals(authCookie)).findFirst();
+                .filter(item -> item.getName().equals(AUTH_COOKIE_NAME)).findFirst();
     }
 }
