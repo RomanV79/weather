@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WORLD WEATHER</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
@@ -10,9 +10,21 @@
 <div class="container">
     <header th:replace="~{fragments/header :: header (isLoggedIn=${isLoggedIn}, user=${user})}"></header>
     <main>
-        <div>
-            <h1>Your Weather</h1>
+
+        <div class="col-md-6 mx-auto mt-5">
+            <div class="text-center">
+                <h1>Find location for your weather</h1></div>
+            <div class="mt-5">
+            <form class="row g-3">
+                <div class="col-10 mr-0">
+                    <input type="search" class="form-control" id="location" name=" location" placeholder="Location">
+                </div>
+                <div class="col-2 ml-0">
+                    <button type="submit" class="btn btn-primary mb-3">Search</button>
+                </div>
+            </form>
         </div>
+
     </main>
 
 </div>
