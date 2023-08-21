@@ -60,7 +60,8 @@ public class OpenWeatherApiClient {
                 "&lon=" +
                 lon +
                 "&appid=" +
-                API_KEY;
+                API_KEY +
+                "&units=metric";
 
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

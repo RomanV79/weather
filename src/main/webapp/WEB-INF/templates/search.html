@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>WORLD WEATHER</title>
+    <title>Search Locations</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
@@ -13,10 +13,10 @@
 
         <div class="col-md-6 mx-auto mt-5">
             <div class="text-center">
-                <h1>Find weather at your location</h1>
+                <h1>Search location</h1>
             </div>
             <div class="mt-5">
-                <form class="row g-3" action="/search">
+                <form class="row g-3">
                     <div class="col-10 mr-0">
                         <input type="search" class="form-control" id="location" name="q" required placeholder="Location">
                     </div>
@@ -24,6 +24,11 @@
                         <button type="submit" class="btn btn-primary mb-3">Search</button>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-5 mb-3 text-center mt-5">
+            <div th:each="location : ${locations}">
+                <div th:replace="~{fragments/location :: location (location=${location})}"></div>
             </div>
         </div>
 

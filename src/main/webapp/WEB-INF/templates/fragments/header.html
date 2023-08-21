@@ -8,7 +8,8 @@
 </head>
 <body>
 <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" th:fragment="header (isLoggedIn, user)">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+            th:fragment="header (isLoggedIn, user)">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
                 <img width="80" src="/images/header-image.png" alt="Weather Earth">
@@ -19,17 +20,15 @@
         </div>
 
         <div class="col-md-3 text-end" th:unless="${isLoggedIn}">
-            <a href="/signin" class="btn btn-outline-primary me-2" >Login</a>
-            <a href="/signup" class="btn btn-primary" >Sign-up</a>
+            <a href="/signin" class="btn btn-outline-primary me-2">Login</a>
+            <a href="/signup" class="btn btn-primary">Sign-up</a>
         </div>
         <div class="col-md-3 text-end" th:if="${isLoggedIn}">
             <a class="btn btn-outline me-2">Hi, <span th:text="${user.login}"/></a>
-            <a href="/logout" class="btn btn-primary" >Logout</a>
+            <a href="/logout" class="btn btn-primary">Logout</a>
         </div>
     </header>
 
 </div>
-
-
 </body>
 </html>
