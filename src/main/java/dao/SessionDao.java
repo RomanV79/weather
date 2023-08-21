@@ -6,6 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import lombok.extern.slf4j.Slf4j;
 import model.Session;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ public class SessionDao {
     public void deleteById(UUID uuid) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        log.info("Start delete session");
+        log.info("Start delete session by Id");
         try {
             Session session = entityManager.find(Session.class, uuid);
             entityManager.remove(session);
@@ -52,5 +53,17 @@ public class SessionDao {
             e.fillInStackTrace();
         }
         log.info("Delete session successful");
+    }
+
+    public void deleteExpired() {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        log.info("Start delete expired session");
+        String hql = "DELETE FROM sessions where sessions.expires_at < :dateTime";
+        entityManager.createNativeQuery(hql)
+                .setParameter("dateTime", LocalDateTime.now())
+                .executeUpdate();
+        transaction.commit();
+
     }
 }
