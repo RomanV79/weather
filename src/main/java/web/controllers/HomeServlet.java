@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import model.Session;
 import model.User;
 import service.SessionService;
-import service.UserService;
 
 import java.io.IOException;
 import java.util.Optional;
