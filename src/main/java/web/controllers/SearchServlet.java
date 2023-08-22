@@ -2,7 +2,6 @@ package web.controllers;
 
 import api.client.OpenWeatherApiClient;
 import api.dto.LocationDto;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

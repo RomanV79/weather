@@ -34,16 +34,15 @@ public class BaseServlet extends HttpServlet {
 
         templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);
-
     }
 
-    protected void processTemplate(String templateName, HttpServletRequest request, HttpServletResponse responce) throws IOException {
+    protected void processTemplate(String templateName, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        responce.setContentType("text/html;charset=UTF-8");
-        IWebExchange iWebExchange = JakartaServletWebApplication.buildApplication(this.getServletContext()).buildExchange(request, responce);
+        response.setContentType("text/html;charset=UTF-8");
+        IWebExchange iWebExchange = JakartaServletWebApplication.buildApplication(this.getServletContext()).buildExchange(request, response);
         WebContext webContext = new WebContext(iWebExchange);
 
-        templateEngine.process(templateName, webContext, responce.getWriter());
+        templateEngine.process(templateName, webContext, response.getWriter());
     }
 
     protected Optional<Cookie> catchAuthCookie(HttpServletRequest request) {
