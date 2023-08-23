@@ -35,6 +35,19 @@ public class SessionService {
         return session;
     }
 
+    public Session getValidSessionByIdWithLocations(UUID uuid) throws IsNotValidSessionException {
+        Optional<Session> optionalSession = sessionDao.getById(uuid);
+        if (optionalSession.isEmpty()) {
+            throw new IsNotValidSessionException("Session does not exist");
+        }
+        Session session = optionalSession.get();
+        if (session.getExpiresAt().isBefore(LocalDateTime.now())) {
+            throw new IsNotValidSessionException("Session expired");
+        }
+
+        return session;
+    }
+
     public void delete(String id) {
         sessionDao.deleteById(UUID.fromString(id));
     }

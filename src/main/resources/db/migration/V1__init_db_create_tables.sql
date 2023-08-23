@@ -27,5 +27,5 @@ CREATE TABLE IF NOT EXISTS locations
     longitude   FLOAT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX locations_unique_latitude_longitude_idx ON locations (latitude, longitude);
+CREATE UNIQUE INDEX locations_unique_user_id_latitude_longitude_idx ON locations (user_id, latitude, longitude);
 CREATE SEQUENCE locations_seq;

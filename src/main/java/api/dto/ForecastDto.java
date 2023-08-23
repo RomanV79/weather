@@ -30,5 +30,7 @@ public class ForecastDto {
     private Sys sys;
     @JsonProperty("timezone")
     private long timezone;
+    @JsonProperty("name")
+    private String city;
 
 }

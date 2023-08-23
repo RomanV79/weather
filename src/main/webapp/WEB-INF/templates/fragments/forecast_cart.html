@@ -9,19 +9,16 @@
 <body>
 <div class="container">
     <div class="row row-cols-1 row-cols-md-5 mb-3 text-center">
-        <div class="col" th:fragment="location (location)">
+        <div class="col" th:fragment="forecast (forecast)">
             <div class="card mb-4 rounded-3 shadow-sm border-primary">
                 <div class="card-header py-3">
-                    <h4 class="my-0 fw-normal" th:text="${location.name}"></h4>
+                    <h4 class="my-0 fw-normal" th:text="${forecast.city}"></h4>
                 </div>
                 <div class="card-body">
                     <form action="" method="post">
-                        <p class="card-title pricing-card-title border border-secondary-subtle" th:text="${location.country}"/>
-                        <p class="card-title pricing-card-title" th:text="${location.state}"/>
-                        <input type="hidden" name="name" th:value="${location.name}">
-                        <input type="hidden" name="latitude" th:value="${location.latitude}">
-                        <input type="hidden" name="longitude" th:value="${location.longitude}">
-                        <button type="submit" class="w-100 btn btn-lg btn-primary">Subscribe</button>
+                        <p class="card-title pricing-card-title">Text-1</p>
+                        <p class="card-title pricing-card-title">Text-2</p>
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">Delete</button>
                     </form>
                 </div>
             </div>

@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import model.User;
 import service.SessionService;
 import service.UserService;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 
+@Slf4j
 @WebServlet(urlPatterns = "/signin")
 public class SignInServlet extends BaseServlet {
 
@@ -22,11 +24,14 @@ public class SignInServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        log.info("Start GET method -> /sign-in");
         super.processTemplate("signin", req, resp);
+        log.info("Finish GET method -> /sign-in");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        log.info("Start POST method -> /sign-in");
         String login = req.getParameter("login").trim();
         String password = req.getParameter("password").trim();
 
