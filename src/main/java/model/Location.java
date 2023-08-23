@@ -1,15 +1,10 @@
 package model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "locations")
 public class Location {
@@ -31,8 +26,4 @@ public class Location {
 
     @Column(name = "longitude")
     private Double longitude;
-
-
-
-
 }

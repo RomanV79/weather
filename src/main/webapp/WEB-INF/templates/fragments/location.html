@@ -15,9 +15,12 @@
                     <h4 class="my-0 fw-normal" th:text="${location.name}"></h4>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form method="post">
                         <p class="card-title pricing-card-title border border-secondary-subtle" th:text="${location.country}"/>
                         <p class="card-title pricing-card-title" th:text="${location.state}"/>
+                        <input type="hidden" name="name" th:value="${location.name}">
+                        <input type="hidden" name="latitude" th:value="${location.latitude}">
+                        <input type="hidden" name="longitude" th:value="${location.longitude}">
                         <button type="submit" class="w-100 btn btn-lg btn-primary">Subscribe</button>
                     </form>
                 </div>

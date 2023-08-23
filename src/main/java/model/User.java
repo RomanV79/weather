@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.Set;
 
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "users")
 public class User {
@@ -27,11 +26,14 @@ public class User {
     private String login;
 
     @Column(name = "password", nullable = false)
+    @ToString.Exclude
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<Session> session;
+    @ToString.Exclude
+    private List<Session> session;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    public Set<Location> location;
+    @ToString.Exclude
+    public List<Location> location;
 }

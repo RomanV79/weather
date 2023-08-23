@@ -26,6 +26,11 @@
                 </form>
             </div>
         </div>
+        <div class="row row-cols-1 row-cols-md-5 mb-3 text-center mt-5">
+            <div th:each="forecast : ${forecasts}">
+                <div th:replace="~{fragments/forecast_cart :: forecast (forecast=${forecast})}"></div>
+            </div>
+        </div>
 
     </main>
 </div>
