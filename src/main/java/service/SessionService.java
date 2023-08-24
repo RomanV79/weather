@@ -15,7 +15,7 @@ public class SessionService {
 
     private final int sessionAlive = 360;
 
-    public UUID insert(User user) {
+    public UUID createAndInsert(User user) {
         UUID uuid = UUID.randomUUID();
         Session session = new Session(uuid, user, LocalDateTime.now().plusMinutes(sessionAlive));
         sessionDao.insert(session);

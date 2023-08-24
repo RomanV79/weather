@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS sessions
     expires_at  TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX sessions_unique_user_id_idx ON sessions (user_id);
+CREATE INDEX sessions_unique_user_id_idx ON sessions (user_id);
 
 
 CREATE TABLE IF NOT EXISTS locations

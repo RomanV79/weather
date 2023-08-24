@@ -26,7 +26,7 @@ import java.util.UUID;
 
 
 @Slf4j
-@WebServlet(urlPatterns = "/")
+@WebServlet(urlPatterns = "/home")
 public class HomeServlet extends BaseServlet {
 
     private final SessionService sessionService = new SessionService();

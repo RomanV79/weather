@@ -20,6 +20,6 @@ public class DeleteServlet extends BaseServlet {
         String locationId = req.getParameter("location-id");
         log.info("Got location-id -> {}", locationId);
         locationService.deleteById(Long.parseLong(locationId));
-        resp.sendRedirect("/");
+        resp.sendRedirect("/home");
     }
 }

@@ -32,23 +32,24 @@ public class SignInServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         log.info("Start POST method -> /sign-in");
-        String login = req.getParameter("login").trim();
-        String password = req.getParameter("password").trim();
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
 
         User user;
         if (!login.isEmpty() && !password.isEmpty()) {
-
+            login = login.trim();
+            password = password.trim();
             try {
                 user = userService.getByLogin(login);
                 if (!PasswordUtil.isValidPassword(password, user.getPassword())) {
                     req.setAttribute("errorPassword", "Wrong password");
                     super.processTemplate("signin", req, resp);
                 }
-                UUID uuid = sessionService.insert(user);
+                UUID uuid = sessionService.createAndInsert(user);
 
                 Cookie cookie = new Cookie(AUTH_COOKIE_NAME, uuid.toString());
                 resp.addCookie(cookie);
-                resp.sendRedirect("/");
+                resp.sendRedirect("/home");
 
             } catch (UserNotFoundException e) {
                 req.setAttribute("errorLogin", "User with login: " + login + " doesn't exist");

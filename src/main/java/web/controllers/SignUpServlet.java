@@ -5,7 +5,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import model.User;
 import service.SessionService;
@@ -23,7 +22,9 @@ public class SignUpServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        log.info("Start GET method -> /sign-up");
         super.processTemplate("signup", req, resp);
+        log.info("Finish GET method -> /sign-up");
     }
 
     @Override
@@ -44,11 +45,11 @@ public class SignUpServlet extends BaseServlet {
             super.processTemplate("signup", req, resp);
         }
 
-        UUID uuid = sessionService.insert(user);
+        UUID uuid = sessionService.createAndInsert(user);
 
         Cookie cookie = new Cookie(AUTH_COOKIE_NAME, uuid.toString());
         resp.addCookie(cookie);
 
-        resp.sendRedirect("/");
+        resp.sendRedirect("/home");
     }
 }
