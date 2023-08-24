@@ -20,4 +20,8 @@ public class LocationService {
     public List<Location> getLocationsByUser(User user) throws LocationsNotFoundException {
         return locationDao.getLocationsByUser(user);
     }
+
+    public void deleteById(Long id) {
+        locationDao.deleteById(id);
+    }
 }

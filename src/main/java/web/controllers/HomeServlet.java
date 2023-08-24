@@ -12,9 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import model.Location;
 import model.Session;
 import model.User;
-import org.hibernate.bytecode.internal.bytebuddy.BytecodeProviderImpl;
 import service.LocationService;
 import service.SessionService;
+import web.dto.ConverterDto;
+import web.dto.ForecastWebDto;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -31,6 +32,7 @@ public class HomeServlet extends BaseServlet {
     private final SessionService sessionService = new SessionService();
     private final LocationService locationService = new LocationService();
     private final OpenWeatherApiClient apiClient = new OpenWeatherApiClient();
+    private final ConverterDto converterDto = new ConverterDto();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -40,6 +42,7 @@ public class HomeServlet extends BaseServlet {
         Optional<Cookie> authCookie = catchAuthCookie(req);
         if (authCookie.isPresent()) {
             UUID uuid = UUID.fromString(authCookie.get().getValue());
+            log.info("Got UUID from cookie -> {}", uuid.toString());
             try {
                 Session session = sessionService.getValidSessionById(uuid);
                 User user = session.getUser();
@@ -48,12 +51,18 @@ public class HomeServlet extends BaseServlet {
 
                 List<Location> locations = locationService.getLocationsByUser(user);
                 log.info("Got locations, size -> {}", locations.size());
-                List<ForecastDto> forecastDtos = new ArrayList<>();
+//                List<ForecastDto> forecastDtos = new ArrayList<>();
+                List<ForecastWebDto> webDtos = new ArrayList<>();
                 for (Location location: locations) {
-                    forecastDtos.add(apiClient.getForecast(location.getLatitude(), location.getLongitude()));
+                    ForecastDto dto = apiClient.getForecast(location.getLatitude(), location.getLongitude());
+//                    forecastDtos.add(dto);
+                    ForecastWebDto webDto = converterDto.fromForecastDtoToForecastWeb(dto);
+                    webDto.setLocationId(location.getId());
+                    webDtos.add(webDto);
+                    log.info("Added to show WebDto -> {}", webDto);
                 }
-                log.info("Got forecasts, size -> {}", forecastDtos.size());
-                req.setAttribute("forecasts", forecastDtos);
+                log.info("Got forecasts, size -> {}", webDtos.size());
+                req.setAttribute("forecasts", webDtos);
             } catch (IsNotValidSessionException e) {
                 // do nothing
             } catch (LocationsNotFoundException | URISyntaxException | InterruptedException e) {

@@ -11,10 +11,7 @@ import model.Location;
 import model.Session;
 import model.User;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 public class LocationDao {
@@ -52,5 +49,23 @@ public class LocationDao {
         }
         log.info("Get locations by login user_id -> {} successful, locations size -> {}", user.getId(), locations.size());
         return locations;
+    }
+
+    public void deleteById(Long id) {
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
+            log.info("Start delete location by Id");
+            try {
+                Location location = entityManager.find(Location.class, id);
+                entityManager.remove(location);
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    transaction.rollback();
+                }
+                e.fillInStackTrace();
+            }
+            log.info("Delete location successful");
     }
 }

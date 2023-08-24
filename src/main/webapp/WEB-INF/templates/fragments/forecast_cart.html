@@ -15,10 +15,19 @@
                     <h4 class="my-0 fw-normal" th:text="${forecast.city}"></h4>
                 </div>
                 <div class="card-body">
-                    <form action="" method="post">
-                        <p class="card-title pricing-card-title">Text-1</p>
-                        <p class="card-title pricing-card-title">Text-2</p>
-                        <button type="submit" class="w-100 btn btn-lg btn-primary">Delete</button>
+                    <form action="/delete" method="post">
+                        <p class="card-text text-start m-0">Country: <span class="fw-semibold" th:text="${forecast.sysCountry}"></span></p>
+                        <p class="card-text text-start m-0">Short description: <span class="fw-semibold" th:text="${forecast.description}"></span></p>
+                        <p class="card-text text-start m-0">Temp: <span class="fw-semibold" th:text="${forecast.mainTemp}"></span> C</p>
+                        <p class="card-text text-start m-0">Pressure: <span class="fw-semibold" th:text="${forecast.mainPressure}"></span> hPa</p>
+                        <p class="card-text text-start m-0">Humidity: <span class="fw-semibold" th:text="${forecast.mainHumidity}"></span> %</p>
+                        <p class="card-text text-start m-0">Visibility: <span class="fw-semibold" th:text="${forecast.visibility}"></span> m</p>
+                        <p class="card-text text-start m-0">Wind speed: <span class="fw-semibold" th:text="${forecast.windSpeed}"></span> m/s</p>
+                        <p class="card-text text-start m-0">Wind gust: <span class="fw-semibold" th:text="${forecast.windGust}"></span> m/s</p>
+                        <p class="card-text text-start m-0">Sunrise: <span class="fw-semibold" th:text="${forecast.sysSunrise}"></span></p>
+                        <p class="card-text text-start m-0">Sunset: <span class="fw-semibold" th:text="${forecast.sysSunset}"></span></p>
+                        <input type="hidden" name="location-id" th:value="${forecast.locationId}">
+                        <button type="submit" class="w-100 btn btn-lg btn-primary mt-3">Delete</button>
                     </form>
                 </div>
             </div>
