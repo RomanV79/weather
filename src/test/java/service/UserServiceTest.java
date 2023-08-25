@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class UserServiceTest extends TestContainerConfig {
 
+    EntityManager entityManager = emf.createEntityManager();
+    UserDao userDao = new UserDao(entityManager);
+    UserService userService = new UserService(userDao);
     @Test
     void user_insert_get_UserNotFoundException_UserExistException() throws UserExistException, UserNotFoundException {
-        EntityManager entityManager = emf.createEntityManager();
-        UserDao userDao = new UserDao(entityManager);
-        UserService userService = new UserService(userDao);
 
         String login = "Bob";
 
