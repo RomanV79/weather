@@ -12,7 +12,16 @@ import java.util.Optional;
 @Slf4j
 public class UserService {
 
-    private final UserDao userDao = new UserDao();
+    private final UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public UserService() {
+        this.userDao = new UserDao();
+    }
+
 
     public User insert(String login, String password) throws UserExistException {
         User user = new User();

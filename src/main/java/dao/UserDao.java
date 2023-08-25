@@ -15,7 +15,15 @@ import java.util.Optional;
 @Slf4j
 public class UserDao {
 
-    private final EntityManager entityManager = PersistUtil.getEntityManager();
+    private final EntityManager entityManager;
+
+    public UserDao() {
+        this.entityManager = PersistUtil.getEntityManager();
+    }
+
+    public UserDao(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public void insert(User user) throws UserExistException {
         EntityTransaction transaction = entityManager.getTransaction();
@@ -50,7 +58,6 @@ public class UserDao {
             throw new UserNotFoundException("User not found");
         }
         log.info("Get user by {} -> {}", login, user);
-        log.info("Get user by login successful");
         return user;
     }
 }
