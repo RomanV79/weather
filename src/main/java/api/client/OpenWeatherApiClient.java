@@ -46,8 +46,9 @@ public class OpenWeatherApiClient {
         HttpResponse<String> location = client.send(request, HttpResponse.BodyHandlers.ofString());
         log.info("Get string for: city -> code: {} -> {}", city, location.statusCode());
 
+        log.info("Response for city -> {} is -> {}", city, location.body());
         LocationDto[] locationDto = objectMapper.readValue(location.body(), LocationDto[].class);
-        log.info("Successful convert to object; received {} -> {} items", city, locationDto.length);
+        log.info("Successful convert to object; received for {} -> {} items", city, locationDto.length);
 
         return locationDto;
     }

@@ -58,6 +58,8 @@ public class SearchServlet extends BaseServlet {
         if (city != null && !city.isBlank()) {
             List<LocationDto> locationsApi = null;
             try {
+                log.info("Start search throw API for city -> {}", city);
+                log.info("Start search throw API for city -> {}", city);
                 locationsApi = Arrays.asList(apiClient.getLocationByCity(city));
             } catch (URISyntaxException | InterruptedException e) {
                 e.fillInStackTrace();
