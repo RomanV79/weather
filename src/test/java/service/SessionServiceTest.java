@@ -23,7 +23,7 @@ class SessionServiceTest extends TestContainerConfig {
     void insertAndGetValidSession() throws UserExistException, IsNotValidSessionException {
         String login = "Tom";
         User user = userService.insert(login, "12345");
-        UUID uuid = sessionService.insert(user);
+        UUID uuid = sessionService.createAndInsert(user);
 
         assertEquals(uuid, sessionService.getValidSessionById(uuid).getId());
     }
@@ -40,7 +40,7 @@ class SessionServiceTest extends TestContainerConfig {
     void delete() throws UserExistException {
         String login = "John";
         User user = userService.insert(login, "12345");
-        UUID uuid = sessionService.insert(user);
+        UUID uuid = sessionService.createAndInsert(user);
         sessionService.delete(uuid.toString());
 
         assertThrows(IsNotValidSessionException.class, () -> sessionService.getValidSessionById(uuid));
