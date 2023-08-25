@@ -1,14 +1,12 @@
 package dao;
 
 import CustomException.LocationsNotFoundException;
-import CustomException.UserNotFoundException;
 import dao.util.PersistUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import lombok.extern.slf4j.Slf4j;
 import model.Location;
-import model.Session;
 import model.User;
 
 import java.util.*;
@@ -16,7 +14,16 @@ import java.util.*;
 @Slf4j
 public class LocationDao {
 
-    private final EntityManager entityManager = PersistUtil.getEntityManager();
+//    private final EntityManager entityManager = PersistUtil.getEntityManager();
+    private final EntityManager entityManager;
+
+    public LocationDao(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public LocationDao() {
+        this.entityManager = PersistUtil.getEntityManager();
+    }
 
     public void insert (Location location) {
         EntityTransaction transaction = entityManager.getTransaction();

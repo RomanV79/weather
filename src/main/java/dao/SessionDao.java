@@ -13,7 +13,15 @@ import java.util.UUID;
 @Slf4j
 public class SessionDao {
 
-    private final EntityManager entityManager = PersistUtil.getEntityManager();
+    private final EntityManager entityManager;
+
+    public SessionDao(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public SessionDao() {
+        this.entityManager = PersistUtil.getEntityManager();
+    }
 
     public void insert (Session session) {
         EntityTransaction transaction = entityManager.getTransaction();

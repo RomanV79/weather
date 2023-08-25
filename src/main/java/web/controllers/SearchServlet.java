@@ -97,7 +97,7 @@ public class SearchServlet extends BaseServlet {
             location.setLongitude(lon);
             locationService.insert(location);
 
-            resp.sendRedirect("/");
+            resp.sendRedirect("/home");
         }
     }
 }
