@@ -21,7 +21,8 @@
                         <input type="hidden" name="name" th:value="${location.name}">
                         <input type="hidden" name="latitude" th:value="${location.latitude}">
                         <input type="hidden" name="longitude" th:value="${location.longitude}">
-                        <button type="submit" class="w-100 btn btn-lg btn-primary">Subscribe</button>
+                        <button type="submit" th:if="${isLoggedIn}" class="w-100 btn btn-lg btn-primary">Subscribe</button>
+                        <button type="button" th:unless="${isLoggedIn}" class="w-100 btn btn-lg btn-primary">You need to signin</button>
                     </form>
                 </div>
             </div>

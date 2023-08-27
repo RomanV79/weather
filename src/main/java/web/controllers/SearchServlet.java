@@ -39,6 +39,7 @@ public class SearchServlet extends BaseServlet {
         Optional<Cookie> authCookie = catchAuthCookie(req);
         if (authCookie.isPresent()) {
             UUID uuid = UUID.fromString(authCookie.get().getValue());
+            log.info("Got UUID from cookie -> {}", uuid.toString());
             try {
                 Session session = sessionService.getValidSessionById(uuid);
                 User user = session.getUser();
@@ -49,6 +50,7 @@ public class SearchServlet extends BaseServlet {
                 req.setAttribute("user", user);
                 log.info("Session exist, get user -> {}", user);
             } catch (IsNotValidSessionException e) {
+                log.info("SearchServlet -> IsNotValidSessionException");
                 // do nothing
             }
         }

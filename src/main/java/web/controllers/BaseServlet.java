@@ -29,8 +29,8 @@ public class BaseServlet extends HttpServlet {
         templateResolver.setPrefix("/WEB-INF/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setCacheTTLMs(3600000L);
-        templateResolver.setCacheable(true);
+//        templateResolver.setCacheTTLMs(3600000L);
+//        templateResolver.setCacheable(true);
 
         templateEngine = new TemplateEngine();
         templateEngine.setTemplateResolver(templateResolver);

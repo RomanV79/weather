@@ -26,7 +26,7 @@ import java.util.UUID;
 
 
 @Slf4j
-@WebServlet(urlPatterns = "/home")
+@WebServlet(urlPatterns = {"/home", ""})
 public class HomeServlet extends BaseServlet {
 
     private final SessionService sessionService = new SessionService();
@@ -51,11 +51,10 @@ public class HomeServlet extends BaseServlet {
 
                 List<Location> locations = locationService.getLocationsByUser(user);
                 log.info("Got locations, size -> {}", locations.size());
-//                List<ForecastDto> forecastDtos = new ArrayList<>();
+
                 List<ForecastWebDto> webDtos = new ArrayList<>();
                 for (Location location: locations) {
                     ForecastDto dto = apiClient.getForecast(location.getLatitude(), location.getLongitude());
-//                    forecastDtos.add(dto);
                     ForecastWebDto webDto = converterDto.fromForecastDtoToForecastWeb(dto);
                     webDto.setLocationId(location.getId());
                     webDtos.add(webDto);
@@ -64,6 +63,7 @@ public class HomeServlet extends BaseServlet {
                 log.info("Got forecasts, size -> {}", webDtos.size());
                 req.setAttribute("forecasts", webDtos);
             } catch (IsNotValidSessionException e) {
+                log.info("HomeServlet -> IsNotValidSessionException");
                 // do nothing
             } catch (LocationsNotFoundException | URISyntaxException | InterruptedException e) {
                 req.setAttribute("errorMessage", e.getMessage());
