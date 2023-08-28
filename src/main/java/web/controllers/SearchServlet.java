@@ -17,7 +17,6 @@ import service.LocationService;
 import service.SessionService;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +25,6 @@ import java.util.UUID;
 @Slf4j
 @WebServlet(urlPatterns = "/search")
 public class SearchServlet extends BaseServlet {
-    private final String API_HOST = "http://api.openweathermap.org";
     private final OpenWeatherApiClient apiClient = new OpenWeatherApiClient();
     private final SessionService sessionService = new SessionService();
     private final LocationService locationService = new LocationService();

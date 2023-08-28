@@ -2,7 +2,6 @@ package service;
 
 import CustomException.IsNotValidSessionException;
 import dao.SessionDao;
-import dao.UserDao;
 import model.Session;
 import model.User;
 

@@ -3,15 +3,12 @@ package api.test;
 import CustomException.OpenApiWeatherErrorException;
 import api.client.OpenWeatherApiClient;
 import api.dto.LocationDto;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 
 @Slf4j

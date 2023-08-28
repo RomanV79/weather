@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import service.LocationService;
 
 import java.io.IOException;
-import java.io.Writer;
 
 @Slf4j
 @WebServlet(urlPatterns = "/delete")
