@@ -1,6 +1,7 @@
 package web.controllers;
 
 import CustomException.IsNotValidSessionException;
+import CustomException.OpenApiWeatherErrorException;
 import api.client.OpenWeatherApiClient;
 import api.dto.LocationDto;
 import jakarta.servlet.annotation.WebServlet;
@@ -25,7 +26,7 @@ import java.util.UUID;
 @Slf4j
 @WebServlet(urlPatterns = "/search")
 public class SearchServlet extends BaseServlet {
-
+    private final String API_HOST = "http://api.openweathermap.org";
     private final OpenWeatherApiClient apiClient = new OpenWeatherApiClient();
     private final SessionService sessionService = new SessionService();
     private final LocationService locationService = new LocationService();
@@ -59,12 +60,11 @@ public class SearchServlet extends BaseServlet {
 
         if (city != null && !city.isBlank()) {
             List<LocationDto> locationsApi = null;
+            log.info("Start search throw API for city -> {}", city);
             try {
-                log.info("Start search throw API for city -> {}", city);
-                log.info("Start search throw API for city -> {}", city);
                 locationsApi = Arrays.asList(apiClient.getLocationByCity(city));
-            } catch (URISyntaxException | InterruptedException e) {
-                e.fillInStackTrace();
+            } catch (OpenApiWeatherErrorException e) {
+                req.setAttribute("errorMessage", e.getMessage());
             }
             if (locationsApi != null) {
                 log.info("Successful search response with locationsApi -> {} items", locationsApi.size());

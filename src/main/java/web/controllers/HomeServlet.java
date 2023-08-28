@@ -2,6 +2,7 @@ package web.controllers;
 
 import CustomException.IsNotValidSessionException;
 import CustomException.LocationsNotFoundException;
+import CustomException.OpenApiWeatherErrorException;
 import api.client.OpenWeatherApiClient;
 import api.dto.ForecastDto;
 import jakarta.servlet.annotation.WebServlet;
@@ -62,10 +63,10 @@ public class HomeServlet extends BaseServlet {
                 }
                 log.info("Got forecasts, size -> {}", webDtos.size());
                 req.setAttribute("forecasts", webDtos);
-            } catch (IsNotValidSessionException e) {
+            } catch (IsNotValidSessionException | LocationsNotFoundException | URISyntaxException e) {
                 log.info("HomeServlet -> IsNotValidSessionException");
                 // do nothing
-            } catch (LocationsNotFoundException | URISyntaxException | InterruptedException e) {
+            } catch (OpenApiWeatherErrorException e) {
                 req.setAttribute("errorMessage", e.getMessage());
             }
         }

@@ -27,6 +27,7 @@
             </div>
         </div>
         <div class="text-center fs-5" th:unless="${isLoggedIn}">Please signin to subscribe on locations</div>
+        <div class="alert alert-danger small p-1 m-5 text-center" role="alert" th:if="${errorMessage}"><span th:text="${errorMessage}"/></div>
         <div class="row row-cols-1 row-cols-md-5 mb-3 text-center mt-5">
             <div th:each="location : ${locations}">
                 <div th:replace="~{fragments/location :: location (location=${location})}"></div>

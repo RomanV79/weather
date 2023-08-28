@@ -1,5 +1,6 @@
 package api.test;
 
+import CustomException.OpenApiWeatherErrorException;
 import api.client.OpenWeatherApiClient;
 import api.dto.ForecastDto;
 import jakarta.servlet.ServletException;
@@ -17,9 +18,10 @@ import java.net.URISyntaxException;
 public class TestForecast extends HttpServlet {
 
     private final OpenWeatherApiClient client = new OpenWeatherApiClient();
+    private final String HOST = "http://api.openweathermap.org";
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         // latitude and longitude for Moscow
         Double lon = 37.6174943;
         Double lat = 55.7504461;
@@ -27,7 +29,7 @@ public class TestForecast extends HttpServlet {
         ForecastDto forecastDto;
         try {
             forecastDto = client.getForecast(lat, lon);
-        } catch (URISyntaxException | InterruptedException e) {
+        } catch (OpenApiWeatherErrorException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
 

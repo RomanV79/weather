@@ -1,5 +1,6 @@
 package api.test;
 
+import CustomException.OpenApiWeatherErrorException;
 import api.client.OpenWeatherApiClient;
 import api.dto.LocationDto;
 import jakarta.servlet.ServletException;
@@ -18,15 +19,16 @@ import java.util.Arrays;
 public class TestLocation extends HttpServlet {
 
     private final OpenWeatherApiClient client = new OpenWeatherApiClient();
+    private final String HOST = "http://api.openweathermap.org";
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String city = req.getParameter("city");
 
         LocationDto[] location;
         try {
             location = client.getLocationByCity(city);
-        } catch (URISyntaxException | InterruptedException e) {
+        } catch (OpenApiWeatherErrorException e) {
             throw new RuntimeException(e);
         }
 
