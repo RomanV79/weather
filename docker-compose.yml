@@ -13,10 +13,5 @@ services:
       - 'POSTGRES_DB=weather'
     restart: always
 
-  weather:
-    image: romanv79/weather:latest
-    restart: always
-    ports:
-      - 8080:8080
 
 #in real project you need save credential to environment variables
