@@ -8,7 +8,9 @@ services:
       - 5432:5432
     environment:
       - 'POSTGRES_USER=user2'
-      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_PASSWORD=isYfi53hm8XMqdTY'
       - 'POSTGRES_HOST_AUTH_METHOD=trust'
       - 'POSTGRES_DB=weather'
-    restart: unless-stopped
+    restart: always
+
+#in real project you need save credential to environment variables
