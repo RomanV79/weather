@@ -12,7 +12,7 @@ import java.util.Properties;
 
 @WebListener()
 @Slf4j
-public class Config implements ServletContextListener {
+public class Config implements ServletContextListener{
 
     public void contextInitialized(ServletContextEvent event) {
 
@@ -33,4 +33,11 @@ public class Config implements ServletContextListener {
         Flyway flyway = Flyway.configure().dataSource(url, user, password).load();
         flyway.migrate();
     }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent sce) {
+        ServletContextListener.super.contextDestroyed(sce);
+    }
+
+
 }
