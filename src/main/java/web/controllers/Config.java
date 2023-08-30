@@ -15,9 +15,6 @@ public class Config implements ServletContextListener{
         String url = System.getenv("WEATHER_DB_HOST");
         String user = System.getenv("WEATHER_DB_USER");
         String password = System.getenv("WEATHER_DB_PASSWORD");
-//        log.info("Url -> {}", url);
-//        log.info("User -> {}", user);
-//        log.info("Password -> {}", password);
 
         Flyway flyway = Flyway.configure().dataSource(url, user, password).load();
         flyway.migrate();
@@ -27,6 +24,4 @@ public class Config implements ServletContextListener{
     public void contextDestroyed(ServletContextEvent sce) {
         ServletContextListener.super.contextDestroyed(sce);
     }
-
-
 }

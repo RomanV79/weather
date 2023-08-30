@@ -10,7 +10,6 @@ import java.util.Map;
 
 @Slf4j
 public class PersistUtil {
-//    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("weatherPersist");
     private static final EntityManagerFactory EMF;
 
     static {
@@ -19,9 +18,6 @@ public class PersistUtil {
         String url = System.getenv("WEATHER_DB_HOST");
         String user = System.getenv("WEATHER_DB_USER");
         String password = System.getenv("WEATHER_DB_PASSWORD");
-//        log.info("Url -> {}", url);
-//        log.info("User -> {}", user);
-//        log.info("Password -> {}", password);
 
         configOverrides.put("jakarta.persistence.jdbc.url", url);
         configOverrides.put("jakarta.persistence.jdbc.user", user);
@@ -34,5 +30,4 @@ public class PersistUtil {
     public static EntityManager getEntityManager() {
         return EMF.createEntityManager();
     }
-
 }

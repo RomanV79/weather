@@ -4,14 +4,8 @@ COPY . .
 RUN mvn clean package
 EXPOSE 8080
 
-#ENV WEATHER_DB_HOST=jdbc:postgresql://postgres:5432/weather
-#ENV WEATHER_DB_HOST=jdbc:postgresql://host.docker.internal:5432/weather
-#
-#ENV WEATHER_DB_USER=user2
-#ENV WEATHER_DB_PASSWORD=isYfi53hm8XMqdTY
-
 FROM tomcat
-COPY --from=build /app/target/*.war $CATALINA_HOME/webapps/weather.war
+COPY --from=build /app/target/*.war $CATALINA_HOME/webapps/ROOT.war
 CMD ["catalina.sh", "run"]
 
 
