@@ -1,14 +1,20 @@
 FROM maven:3.8.5-openjdk-17 AS build
 WORKDIR /app
-COPY pom.xml ./pom.xml
-RUN mvn dependency:go-offline
-
-COPY src ./src
-RUN mvn package
-
-FROM tomcat:10-jdk17-openjdk-buster
-COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/weather.war
+COPY . .
+RUN mvn clean package
 EXPOSE 8080
+
+#ENV WEATHER_DB_HOST=jdbc:postgresql://postgres:5432/weather
+#ENV WEATHER_DB_HOST=jdbc:postgresql://host.docker.internal:5432/weather
+#
+#ENV WEATHER_DB_USER=user2
+#ENV WEATHER_DB_PASSWORD=isYfi53hm8XMqdTY
+
+FROM tomcat
+COPY --from=build /app/target/*.war $CATALINA_HOME/webapps/weather.war
+CMD ["catalina.sh", "run"]
+
+
 
 
 

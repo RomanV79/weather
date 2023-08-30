@@ -6,6 +6,8 @@ services:
     container_name: 'weather_db'
     ports:
       - 5432:5432
+    volumes:
+        - ~/apps/postgres:/var/lib/postgresql/data
     environment:
       - 'POSTGRES_USER=user2'
       - 'POSTGRES_PASSWORD=isYfi53hm8XMqdTY'
@@ -13,5 +15,17 @@ services:
       - 'POSTGRES_DB=weather'
     restart: always
 
-
-#in real project you need save credential to environment variables
+  app:
+    image: weather
+    container_name: 'app_container'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      - 'WEATHER_DB_HOST=jdbc:postgresql://postgres:5432/weather'
+      - 'WEATHER_DB_USER=user2'
+      - 'WEATHER_DB_PASSWORD=isYfi53hm8XMqdTY'
