@@ -8,6 +8,7 @@ import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
+import org.modelmapper.spi.MappingContext;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -24,31 +25,31 @@ public class ConverterDto {
         TypeMap<ForecastDto, ForecastWebDto> typeMap = modelMapper.createTypeMap(ForecastDto.class, ForecastWebDto.class);
         typeMap.addMappings(mapper -> mapper.skip(ForecastWebDto::setLocationId));
 
-        Converter<Sys, String> toLocalTimeSunrise = new AbstractConverter<Sys, String>() {
-            @Override
-            protected String convert(Sys sys) {
-                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
-                Date date = Date.from(Instant.ofEpochSecond(sys.getSunrise()));
-                LocalDateTime localDateTime = Instant.ofEpochMilli(date.getTime())
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDateTime();
-                return localDateTime.format(formatter);
-            }
-        };
-        typeMap.addMappings(mapper -> mapper.using(toLocalTimeSunrise).map(ForecastDto::getSys, ForecastWebDto::setSysSunrise));
+//        Converter<Sys, String> toLocalTimeSunrise = new AbstractConverter<Sys, String>() {
+//            @Override
+//            protected String convert(Sys sys) {
+//                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
+//                Date date = Date.from(Instant.ofEpochSecond(sys.getSunrise()));
+//                LocalDateTime localDateTime = Instant.ofEpochMilli(date.getTime())
+//                        .atZone(ZoneId.systemDefault())
+//                        .toLocalDateTime();
+//                return localDateTime.format(formatter);
+//            }
+//        };
+//        typeMap.addMappings(mapper -> mapper.using(toLocalTimeSunrise).map(ForecastDto::getSys, ForecastWebDto::setSysSunrise));
 
-        Converter<Sys, String> toLocalTimeSunset = new AbstractConverter<Sys, String>() {
-            @Override
-            protected String convert(Sys sys) {
-                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
-                Date date = Date.from(Instant.ofEpochSecond(sys.getSunset()));
-                LocalDateTime localDateTime = Instant.ofEpochMilli(date.getTime())
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDateTime();
-                return localDateTime.format(formatter);
-            }
-        };
-        typeMap.addMappings(mapper -> mapper.using(toLocalTimeSunset).map(ForecastDto::getSys, ForecastWebDto::setSysSunset));
+//        Converter<Sys, String> toLocalTimeSunset = new AbstractConverter<Sys, String>() {
+//            @Override
+//            protected String convert(Sys sys) {
+//                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
+//                Date date = Date.from(Instant.ofEpochSecond(sys.getSunset()));
+//                LocalDateTime localDateTime = Instant.ofEpochMilli(date.getTime())
+//                        .atZone(ZoneId.systemDefault())
+//                        .toLocalDateTime();
+//                return localDateTime.format(formatter);
+//            }
+//        };
+//        typeMap.addMappings(mapper -> mapper.using(toLocalTimeSunset).map(ForecastDto::getSys, ForecastWebDto::setSysSunset));
 
         Converter<List<Weather>, String> fromWeatherToDescription = new AbstractConverter<List<Weather>, String>() {
             @Override

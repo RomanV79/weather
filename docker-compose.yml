@@ -6,8 +6,8 @@ services:
     container_name: 'weather_db'
     ports:
       - 5432:5432
-    volumes:
-        - ~/apps/postgres:/var/lib/postgresql/data
+#    volumes:
+#        - ~/apps/postgres:/var/lib/postgresql/data
     environment:
       - 'POSTGRES_USER=${POSTGRES_USER}'
       - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
@@ -16,16 +16,17 @@ services:
     restart: always
 
   app:
-    image: weather
+    image: romanv79/weather:1.0.1
     container_name: 'app_container'
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
       - postgres
     environment:
       - 'WEATHER_DB_HOST=jdbc:postgresql://postgres:5432/weather'
       - 'WEATHER_DB_USER=${POSTGRES_USER}'
       - 'WEATHER_DB_PASSWORD=${POSTGRES_PASSWORD}'
+    restart: always

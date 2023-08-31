@@ -57,6 +57,7 @@ public class HomeServlet extends BaseServlet {
                 for (Location location: locations) {
                     ForecastDto dto = apiClient.getForecast(location.getLatitude(), location.getLongitude());
                     ForecastWebDto webDto = converterDto.fromForecastDtoToForecastWeb(dto);
+                    webDto.fromUnixTimeToLocalTime();
                     webDto.setLocationId(location.getId());
                     webDtos.add(webDto);
                     log.info("Added to show WebDto -> {}", webDto);
