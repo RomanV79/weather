@@ -9,8 +9,8 @@ services:
     volumes:
         - ~/apps/postgres:/var/lib/postgresql/data
     environment:
-      - 'POSTGRES_USER=user2'
-      - 'POSTGRES_PASSWORD=isYfi53hm8XMqdTY'
+      - 'POSTGRES_USER=${POSTGRES_USER}'
+      - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
       - 'POSTGRES_HOST_AUTH_METHOD=trust'
       - 'POSTGRES_DB=weather'
     restart: always
@@ -27,5 +27,5 @@ services:
       - postgres
     environment:
       - 'WEATHER_DB_HOST=jdbc:postgresql://postgres:5432/weather'
-      - 'WEATHER_DB_USER=user2'
-      - 'WEATHER_DB_PASSWORD=isYfi53hm8XMqdTY'
+      - 'WEATHER_DB_USER=${POSTGRES_USER}'
+      - 'WEATHER_DB_PASSWORD=${POSTGRES_PASSWORD}'
