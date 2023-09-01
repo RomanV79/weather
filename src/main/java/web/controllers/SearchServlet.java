@@ -17,6 +17,8 @@ import service.LocationService;
 import service.SessionService;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +55,9 @@ public class SearchServlet extends BaseServlet {
                 // do nothing
             }
         }
+        
+        String city = URLEncoder.encode(req.getParameter("q"), StandardCharsets.UTF_8);
 
-        String city = req.getParameter("q");
 
         if (city != null && !city.isBlank()) {
             List<LocationDto> locationsApi = null;
