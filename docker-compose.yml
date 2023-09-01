@@ -16,7 +16,7 @@ services:
     restart: always
 
   app:
-    image: romanv79/weather:1.0.1
+    image: romanv79/weather:1.0.2
     container_name: 'app_container'
     build:
       context: .
